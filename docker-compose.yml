@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  botofe-frontend:
+    container_name: botofe-frontend
+    build:
+      context: ./frontend
+      target: runner
+    volumes:
+      - ./frontend:/app
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+  
+  botofe-db:
+    container_name: botofe-db-luiz
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: botofe
+      POSTGRES_USER: botofe
+      POSTGRES_PASSWORD: botofe
+
+  # botofe-backend:
